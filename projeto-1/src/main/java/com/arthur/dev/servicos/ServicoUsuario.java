@@ -59,6 +59,9 @@ public class ServicoUsuario implements ServicoInterface<Usuario> {
       StringBuilder novoConteudoBuilder = new StringBuilder();
       String[] strings = conteudoBuilder.toString().split("\n");
 
+      if(conteudoBuilder.toString().isBlank())
+        throw new UsuarioNaoEncontradoException(chave);
+
       for (String i : strings) {
         Usuario uc = Usuario.fromString(i);
         if (!uc.getApelido().equals(chave)) {

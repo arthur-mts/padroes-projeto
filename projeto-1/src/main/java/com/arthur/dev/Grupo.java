@@ -32,13 +32,13 @@ public class Grupo {
     Usuario user = new Usuario(nome);
     servicoUsuario.registrar(user);
     this.usuarios = servicoUsuario.listar();
-    System.out.printf("Usuário \"%s\" adicionado com sucesso!\n", nome);
+    System.out.printf("\"%s\" entrou no grupo\n", nome);
   }
 
   public void removerUsuario(String nome) {
     this.servicoUsuario.remover(nome);
     this.usuarios = servicoUsuario.listar();
-    System.out.printf("Usuário \"%s\" removido com sucesso!\n", nome);
+    System.out.printf("\"%s\" saiu do grupo\n", nome);
   }
 
   public void enviarMensagem(String apelidoUsuario, String mensagem) {
