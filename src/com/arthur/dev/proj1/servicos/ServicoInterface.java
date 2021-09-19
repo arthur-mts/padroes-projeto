@@ -2,9 +2,11 @@ package com.arthur.dev.proj1.servicos;
 
 import com.arthur.dev.proj1.exceptions.PersistenciaIndisponivelException;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ServicoInterface<T> {
-    void registrar(T obj) throws PersistenciaIndisponivelException;
-    List<T> listar();
+  void registrar(T obj) throws PersistenciaIndisponivelException;
+
+  List<T> listar() throws PersistenciaIndisponivelException;
 }
