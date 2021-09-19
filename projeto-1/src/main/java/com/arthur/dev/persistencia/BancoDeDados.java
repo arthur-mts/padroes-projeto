@@ -5,7 +5,6 @@ import com.arthur.dev.exceptions.PersistenciaIndisponivelException;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -41,12 +40,27 @@ public class BancoDeDados {
     return instancia;
   }
 
+  public BufferedReader getUsuariosReader() {
+    try {
+      return new BufferedReader(new FileReader(arquivoUsuarios));
+    }
+    catch (IOException e){
+      throw new PersistenciaIndisponivelException(e);
+    }
+  }
+
   public FileOutputStream getUsuariosWriter() {
     try {
       return new FileOutputStream(arquivoUsuarios, true);
     }
     catch (IOException e){
       throw new PersistenciaIndisponivelException(e);
+    }
+  }
+
+  public void deleteUsuariosFile() {
+    if(!this.arquivoUsuarios.delete()){
+      throw new PersistenciaIndisponivelException();
     }
   }
 
@@ -59,14 +73,7 @@ public class BancoDeDados {
     }
   }
 
-  public BufferedReader getUsuariosReader() {
-    try {
-      return new BufferedReader(new FileReader(arquivoUsuarios));
-    }
-    catch (IOException e){
-      throw new PersistenciaIndisponivelException(e);
-    }
-  }
+
 
   public BufferedReader getMensagensReader() {
     try {

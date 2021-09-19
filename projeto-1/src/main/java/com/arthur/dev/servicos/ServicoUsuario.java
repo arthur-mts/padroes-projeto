@@ -4,9 +4,11 @@ package com.arthur.dev.servicos;
 import com.arthur.dev.entidades.Usuario;
 import com.arthur.dev.exceptions.PersistenciaIndisponivelException;
 import com.arthur.dev.exceptions.UsuarioJaExistenteException;
+import com.arthur.dev.exceptions.UsuarioNaoEncontradoException;
 import com.arthur.dev.persistencia.BancoDeDados;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,11 +25,12 @@ public class ServicoUsuario implements ServicoInterface<Usuario> {
   public void registrar(Usuario usuario) throws PersistenciaIndisponivelException {
     try {
       List<Usuario> usuarios = this.listar();
-      usuarios.stream().filter(usuarioC -> usuarioC.getApelido().equals(usuario.getApelido())).findFirst().map((__)->{
+      FileOutputStream usuariosWriter = this.bancoDeDados.getUsuariosWriter();
+      usuarios.stream().filter(usuarioC -> usuarioC.getApelido().equals(usuario.getApelido())).findFirst().map((__) -> {
         throw new UsuarioJaExistenteException(usuario.getApelido());
       });
-      this.bancoDeDados.getUsuariosWriter().write(usuario.toString().concat("\n").getBytes());
-      this.bancoDeDados.getUsuariosWriter().close();
+      usuariosWriter.write(usuario.toString().concat("\n").getBytes());
+      usuariosWriter.close();
     } catch (IOException e) {
       throw new PersistenciaIndisponivelException(e);
     }
@@ -35,8 +38,46 @@ public class ServicoUsuario implements ServicoInterface<Usuario> {
 
   @Override
   public List<Usuario> listar() {
-    BufferedReader usuariosReader = this.bancoDeDados.getUsuariosReader();
-    Stream<String> linhas = usuariosReader.lines();
-    return linhas.map((Usuario::fromString)).collect(Collectors.toList());
+    try {
+      BufferedReader usuariosReader = this.bancoDeDados.getUsuariosReader();
+      Stream<String> linhas = usuariosReader.lines();
+      List<Usuario> usuarios = linhas.map((Usuario::fromString)).collect(Collectors.toList());
+      usuariosReader.close();
+      return usuarios;
+    } catch (IOException e) {
+      throw new PersistenciaIndisponivelException(e);
+    }
+  }
+
+  @Override
+  public void remover(String chave) {
+    try {
+      BufferedReader usuariosReader = this.bancoDeDados.getUsuariosReader();
+      StringBuilder conteudoBuilder = new StringBuilder();
+      usuariosReader.lines().forEach((linha)-> conteudoBuilder.append(linha.concat("\n")));
+
+      StringBuilder novoConteudoBuilder = new StringBuilder();
+      String[] strings = conteudoBuilder.toString().split("\n");
+
+      for (String i : strings) {
+        Usuario uc = Usuario.fromString(i);
+        if (!uc.getApelido().equals(chave)) {
+          novoConteudoBuilder.append(i.concat("\n"));
+        }
+      }
+
+      if(novoConteudoBuilder.toString().length() == conteudoBuilder.toString().length())
+        throw new UsuarioNaoEncontradoException(chave);
+
+      this.bancoDeDados.deleteUsuariosFile();
+
+      FileOutputStream usuariosWriter = this.bancoDeDados.getUsuariosWriter();
+
+      usuariosWriter.write(novoConteudoBuilder.toString().getBytes());
+      usuariosWriter.close();
+
+    } catch (IOException e) {
+      throw new PersistenciaIndisponivelException(e);
+    }
   }
 }

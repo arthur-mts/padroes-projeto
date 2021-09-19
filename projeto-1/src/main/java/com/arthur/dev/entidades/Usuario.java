@@ -19,7 +19,7 @@ public class Usuario {
   }
 
   public void receberMensagem(Mensagem m) {
-    System.out.printf("Mensagem de %s: %s%n", m.getDono().getApelido(), m.getConteudo());
+    System.out.printf("[%s] Mensagem de %s: \"%s\"\n", this.getApelido(), m.getDono().getApelido(), m.getConteudo());
   }
 
   @Override

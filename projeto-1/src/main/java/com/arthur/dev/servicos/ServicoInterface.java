@@ -8,4 +8,6 @@ public interface ServicoInterface<T> {
   void registrar(T obj) throws PersistenciaIndisponivelException;
 
   List<T> listar() throws PersistenciaIndisponivelException;
+
+  void remover(String chave) throws PersistenciaIndisponivelException;
 }

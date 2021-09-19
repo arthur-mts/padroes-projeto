@@ -36,7 +36,9 @@ public class Grupo {
   }
 
   public void removerUsuario(String nome) {
-    this.usuarios.remove(this.getUsuario(nome));
+    this.servicoUsuario.remover(nome);
+    this.usuarios = servicoUsuario.listar();
+    System.out.printf("Usuário \"%s\" removido com sucesso!\n", nome);
   }
 
   public void enviarMensagem(String apelidoUsuario, String mensagem) {
@@ -51,12 +53,16 @@ public class Grupo {
   }
 
   private void notificarParaUsuarios(Mensagem mensagem) {
-    this.usuarios.forEach(usuario -> usuario.receberMensagem(mensagem));
+    this.usuarios.forEach(usuario -> {
+      if (!usuario.equals(mensagem.getDono())) {
+        usuario.receberMensagem(mensagem);
+      }
+    });
   }
 
 
   public static void main(String[] args) {
-    if(args.length == 0) throw new ComandoInvalidoException();
+    if (args.length == 0) throw new ComandoInvalidoException();
     Comandos comando = Comandos.getEnum(args[0]);
 
     Grupo g = new Grupo();
@@ -66,19 +72,19 @@ public class Grupo {
 
     switch (comando) {
       case add:
-        if(args.length < 2)
+        if (args.length < 2)
           throw new ComandoInvalidoException("Digite o apelido do usuário.");
         apelido = args[1];
         g.adicionarUsuario(apelido);
         break;
       case del:
-        if(args.length < 2)
+        if (args.length < 2)
           throw new ComandoInvalidoException("Digite o apelido do usuário.");
         apelido = args[1];
         g.removerUsuario(apelido);
         break;
       case msg:
-        if(args.length < 2)
+        if (args.length < 2)
           throw new ComandoInvalidoException("Digite o apelido do usuario e em seguida sua mensagem.");
         apelido = args[1];
         mensagem = args[2];

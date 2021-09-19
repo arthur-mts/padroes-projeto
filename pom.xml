@@ -17,16 +17,13 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
-    <modules>
-        <module>projeto-1</module>
-    </modules>
-
     <dependencies>
         <dependency>
             <groupId>com.katyusco</groupId>
             <artifactId>ServicoTomada3Pinos</artifactId>
             <scope>system</scope>
             <systemPath>${project.basedir}/ServicoTomada3Pinos.jar</systemPath>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 
