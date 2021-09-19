@@ -1,6 +1,7 @@
-package com.arthur.dev.proj1.enums;
+package com.arthur.dev.enums;
 
-import com.arthur.dev.proj1.exceptions.ComandoInvalidoException;
+
+import com.arthur.dev.exceptions.ComandoInvalidoException;
 
 import java.util.Arrays;
 

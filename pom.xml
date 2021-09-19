@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.arthur.dev</groupId>
+    <artifactId>padroes-projeto</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>padroes-projeto</name>
+    <description>Repositório de atividade da disciplina Padrões de Projeto</description>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <modules>
+        <module>projeto-1</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.katyusco</groupId>
+            <artifactId>ServicoTomada3Pinos</artifactId>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/ServicoTomada3Pinos.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+    
+</project>

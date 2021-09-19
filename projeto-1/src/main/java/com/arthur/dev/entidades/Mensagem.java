@@ -1,4 +1,4 @@
-package com.arthur.dev.proj1.entidades;
+package com.arthur.dev.entidades;
 
 public class Mensagem {
   private Usuario dono;

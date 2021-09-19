@@ -1,4 +1,4 @@
-package com.arthur.dev.proj1.exceptions;
+package com.arthur.dev.exceptions;
 
 public class UsuarioNaoEncontradoException extends RuntimeException {
   public UsuarioNaoEncontradoException(String nomeUsuario) {

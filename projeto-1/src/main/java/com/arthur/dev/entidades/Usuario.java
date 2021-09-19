@@ -1,6 +1,7 @@
-package com.arthur.dev.proj1.entidades;
+package com.arthur.dev.entidades;
 
-import com.arthur.dev.proj1.exceptions.PersistenciaIndisponivelException;
+
+import com.arthur.dev.exceptions.PersistenciaIndisponivelException;
 
 public class Usuario {
   private String apelido;

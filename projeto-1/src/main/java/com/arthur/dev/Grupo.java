@@ -1,13 +1,13 @@
-package com.arthur.dev.proj1;
+package com.arthur.dev;
 
-import com.arthur.dev.proj1.entidades.Mensagem;
-import com.arthur.dev.proj1.entidades.Usuario;
-import com.arthur.dev.proj1.enums.Comandos;
-import com.arthur.dev.proj1.exceptions.ComandoInvalidoException;
-import com.arthur.dev.proj1.exceptions.UsuarioNaoEncontradoException;
-import com.arthur.dev.proj1.persistencia.BancoDeDados;
-import com.arthur.dev.proj1.servicos.ServicoInterface;
-import com.arthur.dev.proj1.servicos.ServicoUsuario;
+
+import com.arthur.dev.entidades.Mensagem;
+import com.arthur.dev.entidades.Usuario;
+import com.arthur.dev.enums.Comandos;
+import com.arthur.dev.exceptions.ComandoInvalidoException;
+import com.arthur.dev.exceptions.UsuarioNaoEncontradoException;
+import com.arthur.dev.servicos.ServicoInterface;
+import com.arthur.dev.servicos.ServicoUsuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +56,7 @@ public class Grupo {
 
 
   public static void main(String[] args) {
+    if(args.length == 0) throw new ComandoInvalidoException();
     Comandos comando = Comandos.getEnum(args[0]);
 
     Grupo g = new Grupo();

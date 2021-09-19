@@ -1,4 +1,4 @@
-package com.arthur.dev.proj1.exceptions;
+package com.arthur.dev.exceptions;
 
 public class PersistenciaCorrompidaException extends RuntimeException{
   public PersistenciaCorrompidaException(Throwable e) {

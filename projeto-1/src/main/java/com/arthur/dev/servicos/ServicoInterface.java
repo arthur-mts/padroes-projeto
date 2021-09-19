@@ -1,8 +1,7 @@
-package com.arthur.dev.proj1.servicos;
+package com.arthur.dev.servicos;
 
-import com.arthur.dev.proj1.exceptions.PersistenciaIndisponivelException;
+import com.arthur.dev.exceptions.PersistenciaIndisponivelException;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface ServicoInterface<T> {

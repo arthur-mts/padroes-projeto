@@ -1,4 +1,4 @@
-package com.arthur.dev.proj1.exceptions;
+package com.arthur.dev.exceptions;
 
 public class ComandoInvalidoException extends RuntimeException {
   private static final String MENSAGEM_BASE = "Comando invalido!";
